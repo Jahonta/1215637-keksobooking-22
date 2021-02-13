@@ -4,7 +4,7 @@ const priceElement = formElement.querySelector('#price');
 const timeInElement = formElement.querySelector('#timein');
 const timeOutElement = formElement.querySelector('#timeout');
 
-const typeToPrice = {
+const typesToPrices = {
   flat: 1000,
   bungalow: 0,
   house: 5000,
@@ -12,8 +12,8 @@ const typeToPrice = {
 };
 
 typeElement.addEventListener('change', () => {
-  priceElement.placeholder = typeToPrice[typeElement.value];
-  priceElement.min = typeToPrice[typeElement.value];
+  priceElement.placeholder = typesToPrices[typeElement.value];
+  priceElement.min = typesToPrices[typeElement.value];
 });
 
 timeInElement.addEventListener('change', () => {
