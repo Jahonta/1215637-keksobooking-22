@@ -12,7 +12,7 @@ const createAd = () => {
       avatar: `img/avatars/user0${getRandomInteger(0, 8)}.png`,
     },
     offer: {
-      title: 'Заголовок лобъявления',
+      title: 'Заголовок объявления',
       address: `${getRandomFloat(0, 90, 5)}, ${getRandomFloat(0, 90, 5)}`,
       price: getRandomInteger(1, 9999),
       type: getRandomArrayElement(TYPES),
