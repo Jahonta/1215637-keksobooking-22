@@ -66,4 +66,8 @@ const setActiveState = () => {
   turnFormOn(mapFilterElement, mapFilterFields);
 };
 
-export {setInactiveState, setActiveState};
+const setAddress = ({lat, lng}) => {
+  addressField.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+};
+
+export {setInactiveState, setActiveState, setAddress};
