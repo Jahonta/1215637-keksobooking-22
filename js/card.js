@@ -32,7 +32,7 @@ const createCardElement = ({author, offer}) => {
   cardElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   cardElement.querySelector('.popup__features').innerHTML = offer.features ? createFeatures(offer.features) : '';
   cardElement.querySelector('.popup__description').textContent = offer.description;
-  cardElement.querySelector('.popup__photos').innerHTML = createPhotos(offer.photos);
+  cardElement.querySelector('.popup__photos').innerHTML = offer.photos ? createPhotos(offer.photos) : '';
 
   return cardElement;
 };
