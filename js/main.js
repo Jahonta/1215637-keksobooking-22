@@ -1,2 +1,4 @@
 import './card.js';
-import './form.js';
+import {setInactiveState} from './form.js';
+
+setInactiveState();

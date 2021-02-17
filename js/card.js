@@ -1,6 +1,3 @@
-import {ads} from './data.js';
-
-const mapElement = document.querySelector('.map__canvas');
 const cardTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
@@ -40,5 +37,4 @@ const createCardElement = ({author, offer}) => {
   return cardElement;
 };
 
-const cardElement = createCardElement(ads[0]);
-mapElement.append(cardElement);
+export default createCardElement;
