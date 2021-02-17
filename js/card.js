@@ -1,6 +1,3 @@
-import {ads} from './data.js';
-
-const mapElement = document.querySelector('.map__canvas');
 const cardTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
@@ -33,12 +30,11 @@ const createCardElement = ({author, offer}) => {
   cardElement.querySelector('.popup__type').textContent = typesEngToRus[offer.type];
   cardElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
   cardElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
-  cardElement.querySelector('.popup__features').innerHTML = createFeatures(offer.features);
+  cardElement.querySelector('.popup__features').innerHTML = offer.features ? createFeatures(offer.features) : '';
   cardElement.querySelector('.popup__description').textContent = offer.description;
-  cardElement.querySelector('.popup__photos').innerHTML = createPhotos(offer.photos);
+  cardElement.querySelector('.popup__photos').innerHTML = offer.photos ? createPhotos(offer.photos) : '';
 
   return cardElement;
 };
 
-const cardElement = createCardElement(ads[0]);
-mapElement.append(cardElement);
+export default createCardElement;

@@ -1,2 +1,5 @@
-import './card.js';
-import './form.js';
+import {setInactiveState} from './form.js';
+import renderMap from './map.js';
+
+setInactiveState();
+renderMap();

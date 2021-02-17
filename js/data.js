@@ -20,9 +20,9 @@ const createAd = () => {
       guests: getRandomInteger(1, 10),
       checkin: getRandomArrayElement(CHECK_TIME),
       checkout: getRandomArrayElement(CHECK_TIME),
-      features: FEATURES.slice(0, getRandomInteger(1, FEATURES.length - 1)),
+      features: FEATURES.slice(0, getRandomInteger(0, FEATURES.length - 1)),
       description: 'Описание помещения.',
-      photos: new Array(getRandomInteger(1, 8)).fill(null).map(() => getRandomArrayElement(PHOTOS)),
+      photos: new Array(getRandomInteger(0, 8)).fill(null).map(() => getRandomArrayElement(PHOTOS)),
     },
     location: {
       x: getRandomFloat(35.65000, 35.70000, 5),
@@ -33,4 +33,4 @@ const createAd = () => {
 
 const ads = new Array(ADS_COUNT).fill(null).map(createAd);
 
-export {ads};
+export default ads;
