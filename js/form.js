@@ -139,6 +139,12 @@ roomNumberField.addEventListener('change', () => {
   disableCapacity();
 });
 
+adFormElement.addEventListener('submit', (evt) => {
+  if (addressField.value === '') {
+    evt.preventDefault();
+  }
+})
+
 capacityField.addEventListener('change', validateCapacity);
 titleField.addEventListener('invalid', validateTitle);
 priceField.addEventListener('invalid', validatePrice);
