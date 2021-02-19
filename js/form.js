@@ -13,24 +13,14 @@ const roomNumberField = adFormElement.querySelector('#room_number');
 const featureFields = adFormElement.querySelectorAll('.feature__checkbox');
 
 const mapFilterElement = document.querySelector('.map__filters');
-const housingTypeField = mapFilterElement.querySelectorAll('#housing-type');
-const housingPriceField = mapFilterElement.querySelectorAll('#housing-price');
-const housingRoomsField = mapFilterElement.querySelectorAll('#housing-rooms');
-const housingGuestsField = mapFilterElement.querySelectorAll('#housing-guests');
+const housingTypeField = mapFilterElement.querySelector('#housing-type');
+const housingPriceField = mapFilterElement.querySelector('#housing-price');
+const housingRoomsField = mapFilterElement.querySelector('#housing-rooms');
+const housingGuestsField = mapFilterElement.querySelector('#housing-guests');
 const mapFeatureFields = mapFilterElement.querySelectorAll('.map__checkbox');
 
 const adFormFields = [typeField, priceField, timeInField, timeOutField, avatarField, titleField, addressField, capacityField, descriptionField, imagesField, roomNumberField, ...featureFields];
-const mapFilterFields = [housingTypeField, housingPriceField, housingRoomsField, housingGuestsField, mapFeatureFields];
-
-const FieldLimit = {
-  MIN_TITLE_LENGTH: 30,
-  MAX_TITLE_LENGTH: 100,
-  MAX_PRICE: 1000000,
-  MIN_BUNGALOW_PRICE: 0,
-  MIN_FLAT_PRICE: 1000,
-  MIN_HOUSE_PRICE: 5000,
-  MIN_PALACE_PRICE: 10000,
-}
+const mapFilterFields = [housingTypeField, housingPriceField, housingRoomsField, housingGuestsField, ...mapFeatureFields];
 
 const typesToPrices = {
   flat: 1000,
@@ -74,18 +64,61 @@ const setAddress = ({lat, lng}) => {
   addressField.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
 };
 
-const validateTitle = () => {
-  const valueLength = titleField.value.length;
-  let message = '';
+const validateTitle = (evt) => {
+  const {tooShort, tooLong, valueMissing} = evt.target.validity;
 
-  if (valueLength < FieldLimit.MIN_TITLE_LENGTH) {
-    message = 'Ещё ' + (FieldLimit.MIN_TITLE_LENGTH - valueLength) + ' симв.';
+  switch (true) {
+    case tooShort:
+      titleField.setCustomValidity(`Заголовок должен быть минимум ${titleField.minLength} символов`);
+      break;
+    case tooLong:
+      titleField.setCustomValidity(`Заголовок не должен быть длиннее ${titleField.maxLength} символов`);
+      break;
+    case valueMissing:
+      titleField.setCustomValidity('Введите заголовок');
+      break;
+    default:
+      titleField.setCustomValidity('');
+      break;
   }
-  if (valueLength > FieldLimit.MAX_NAME_LENGTH) {
-    message = 'Удалите лишние ' + (valueLength - FieldLimit.MAX_NAME_LENGTH) + ' симв.';
-  }
+};
 
-  titleField.setCustomValidity(message);
+const validatePrice = (evt) => {
+  const {rangeUnderflow, rangeOverflow, valueMissing} = evt.target.validity;
+
+  switch (true) {
+    case rangeUnderflow:
+      priceField.setCustomValidity(`Цена не должна быть ниже ${priceField.min} рублей`);
+      break;
+    case rangeOverflow:
+      priceField.setCustomValidity(`Цена не должна быть выше ${priceField.max} рублей`);
+      break;
+    case valueMissing:
+      priceField.setCustomValidity('Введите цену');
+      break;
+    default:
+      priceField.setCustomValidity('');
+      break;
+  }
+};
+
+const validateCapacity = () => {
+  if (!roomsToGuests[roomNumberField.value].includes(capacityField.value)) {
+    capacityField.setCustomValidity('Неверное значение!');
+  } else {
+    capacityField.setCustomValidity('');
+  }
+  capacityField.reportValidity();
+};
+
+const disableCapacity = () => {
+  for (const option of capacityField.options) {
+    if (roomsToGuests[roomNumberField.value].includes(option.value)) {
+      option.disabled = false;
+    } else {
+      option.disabled = true;
+    }
+  }
 };
 
 typeField.addEventListener('change', () => {
@@ -101,6 +134,13 @@ timeOutField.addEventListener('change', () => {
   timeInField.value = timeOutField.value;
 });
 
+roomNumberField.addEventListener('change', () => {
+  validateCapacity();
+  disableCapacity();
+});
+
+capacityField.addEventListener('change', validateCapacity);
 titleField.addEventListener('invalid', validateTitle);
+priceField.addEventListener('invalid', validatePrice);
 
 export {setInactiveState, setActiveState, setAddress};
