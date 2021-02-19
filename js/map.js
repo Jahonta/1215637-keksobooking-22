@@ -1,8 +1,8 @@
+/* global L:readonly */
 import {setActiveState, setAddress} from './form.js';
 import ads from './data.js';
 import createCardElement from './card.js';
 
-const L = window.L;
 const map = L.map('map-canvas');
 
 const initMap = () => {
