@@ -1,16 +1,16 @@
 /* global L:readonly */
 import {setActiveState, setAddress} from './form.js';
-import ads from './data.js';
 import createCardElement from './card.js';
 
+const START_COORDINATE = {
+  lat: 35.66023,
+  lng: 139.73007,
+};
 const map = L.map('map-canvas');
 
 const initMap = () => {
   map.on('load', onMapLoad)
-    .setView({
-      lat: 35.66023,
-      lng: 139.73007,
-    }, 12);
+    .setView(START_COORDINATE, 10);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -51,8 +51,8 @@ const setAdMarkers = (ads) => {
 
     const marker = L.marker(
       {
-        lat: ad.location.x,
-        lng: ad.location.y,
+        lat: ad.location.lat,
+        lng: ad.location.lng,
       },
       {
         icon,
@@ -76,7 +76,7 @@ const onMainPinMove = (evt) => {
   setAddress(evt.target.getLatLng());
 }
 
-const renderMap = () => {
+const renderMap = (ads) => {
   initMap();
   setMainMarker();
   setAdMarkers(ads);
