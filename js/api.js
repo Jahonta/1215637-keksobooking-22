@@ -16,7 +16,7 @@ const getData = (onSuccess, onError) => {
     })
 };
 
-const sendData = (body) => {
+const sendData = (onSuccess, body) => {
   fetch(
     'https://22.javascript.pages.academy/keksobooking',
     {
@@ -26,6 +26,7 @@ const sendData = (body) => {
   )
     .then((response) => {
       if (response.ok) {
+        onSuccess();
         showSuccessMessage();
       } else {
         showErrorMessage();

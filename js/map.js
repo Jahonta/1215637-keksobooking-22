@@ -80,6 +80,7 @@ const renderMap = (ads) => {
   initMap();
   setMainMarker();
   setAdMarkers(ads);
+  setAddress(START_COORDINATE);
 }
 
 export default renderMap;

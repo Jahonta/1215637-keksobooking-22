@@ -131,6 +131,10 @@ const disableCapacity = () => {
   }
 };
 
+const resetForm = () => {
+  adFormElement.reset();
+};
+
 typeField.addEventListener('change', () => {
   priceField.placeholder = typesToPrices[typeField.value];
   priceField.min = typesToPrices[typeField.value];
@@ -161,9 +165,7 @@ addressField.addEventListener('invalid', validateAddress);
 const setFormSubmit = (sendData) => {
   adFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
-    sendData(new FormData(evt.target));
-    adFormElement.reset();
+    sendData(resetForm, new FormData(evt.target));
   });
 };
 
