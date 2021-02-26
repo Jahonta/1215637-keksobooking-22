@@ -111,6 +111,16 @@ const validateCapacity = () => {
   capacityField.reportValidity();
 };
 
+const validateAddress = (evt) => {
+  const {valueMissing} = evt.target.validity;
+
+  if (valueMissing) {
+    addressField.setCustomValidity('Выберите адрес!');
+  } else {
+    addressField.setCustomValidity('');
+  }
+};
+
 const disableCapacity = () => {
   for (const option of capacityField.options) {
     if (roomsToGuests[roomNumberField.value].includes(option.value)) {
@@ -139,14 +149,23 @@ roomNumberField.addEventListener('change', () => {
   disableCapacity();
 });
 
-adFormElement.addEventListener('submit', (evt) => {
-  if (addressField.value === '') {
-    evt.preventDefault();
-  }
-})
+addressField.addEventListener('focus', () => {
+  addressField.blur();
+});
 
 capacityField.addEventListener('change', validateCapacity);
 titleField.addEventListener('invalid', validateTitle);
 priceField.addEventListener('invalid', validatePrice);
+addressField.addEventListener('invalid', validateAddress);
 
-export {setInactiveState, setActiveState, setAddress};
+const setFormSubmit = (sendData) => {
+  adFormElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(new FormData(evt.target));
+    adFormElement.reset();
+  });
+};
+
+
+export {setInactiveState, setActiveState, setAddress, setFormSubmit};
