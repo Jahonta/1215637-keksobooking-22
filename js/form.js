@@ -1,4 +1,5 @@
 const adFormElement = document.querySelector('.ad-form');
+const resetButton = document.querySelector('.ad-form__reset');
 const typeField = adFormElement.querySelector('#type');
 const priceField = adFormElement.querySelector('#price');
 const timeInField = adFormElement.querySelector('#timein');
@@ -131,7 +132,8 @@ const disableCapacity = () => {
   }
 };
 
-const resetForm = () => {
+const resetForm = (evt) => {
+  evt.preventDefault();
   adFormElement.reset();
 };
 
@@ -157,6 +159,7 @@ addressField.addEventListener('focus', () => {
   addressField.blur();
 });
 
+resetButton.addEventListener('click', resetForm);
 capacityField.addEventListener('change', validateCapacity);
 titleField.addEventListener('invalid', validateTitle);
 priceField.addEventListener('invalid', validatePrice);
