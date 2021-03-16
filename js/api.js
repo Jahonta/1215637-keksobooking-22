@@ -1,5 +1,7 @@
 import {showErrorMessage, showSuccessMessage} from './message.js';
 
+const ADS_COUNT = 10;
+
 const getData = (onSuccess, onError) => {
   fetch('https://22.javascript.pages.academy/keksobooking/data')
     .then((response) => {
@@ -9,7 +11,8 @@ const getData = (onSuccess, onError) => {
       onError('Не удалось загрузить похожие объявления');
     })
     .then((ads) => {
-      onSuccess(ads);
+      const slicedAds = ads.slice(0, ADS_COUNT);
+      onSuccess(slicedAds);
     })
     .catch(() => {
       onError('Не удалось загрузить похожие объявления');

@@ -1,4 +1,8 @@
 const ALERT_SHOW_TIME = 5000;
+const START_COORDINATE = {
+  lat: 35.66023,
+  lng: 139.73007,
+};
 
 const getRandomInteger = function (min, max) {
   if (min >= max || min < 0) {
@@ -39,4 +43,4 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME );
 }
 
-export {getRandomInteger, getRandomFloat, getRandomArrayElement, showAlert};
+export {getRandomInteger, getRandomFloat, getRandomArrayElement, showAlert, START_COORDINATE};

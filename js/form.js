@@ -1,3 +1,5 @@
+import {START_COORDINATE} from './util.js'
+
 const adFormElement = document.querySelector('.ad-form');
 const resetButton = document.querySelector('.ad-form__reset');
 const typeField = adFormElement.querySelector('#type');
@@ -135,6 +137,7 @@ const disableCapacity = () => {
 const resetForm = (evt) => {
   evt.preventDefault();
   adFormElement.reset();
+  setAddress(START_COORDINATE);
 };
 
 typeField.addEventListener('change', () => {

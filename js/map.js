@@ -1,11 +1,9 @@
 /* global L:readonly */
 import {setActiveState, setAddress} from './form.js';
 import createCardElement from './card.js';
+import {START_COORDINATE} from './util.js'
 
-const START_COORDINATE = {
-  lat: 35.66023,
-  lng: 139.73007,
-};
+
 const map = L.map('map-canvas');
 
 const initMap = () => {
