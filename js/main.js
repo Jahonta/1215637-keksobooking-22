@@ -1,5 +1,8 @@
-import {setInactiveState} from './form.js';
+import {setInactiveState, setFormSubmit} from './form.js';
+import {getData, sendData} from './api.js';
+import {showAlert} from './util.js';
 import renderMap from './map.js';
 
 setInactiveState();
-renderMap();
+getData(renderMap, showAlert);
+setFormSubmit(sendData);
