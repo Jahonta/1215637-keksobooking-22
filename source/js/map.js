@@ -3,19 +3,15 @@ import {setActiveState, setAddress} from './form.js';
 import createCardElement from './card.js';
 import {START_COORDINATE} from './util.js'
 
-
 const map = L.map('map-canvas');
 
 const initMap = () => {
   map.on('load', onMapLoad)
     .setView(START_COORDINATE, 10);
 
-  L.tileLayer(
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    },
-  ).addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
 };
 
 const setMainMarker = () => {

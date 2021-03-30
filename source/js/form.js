@@ -15,15 +15,7 @@ const imagesField = adFormElement.querySelector('#images');
 const roomNumberField = adFormElement.querySelector('#room_number');
 const featureFields = adFormElement.querySelectorAll('.feature__checkbox');
 
-const mapFilterElement = document.querySelector('.map__filters');
-const housingTypeField = mapFilterElement.querySelector('#housing-type');
-const housingPriceField = mapFilterElement.querySelector('#housing-price');
-const housingRoomsField = mapFilterElement.querySelector('#housing-rooms');
-const housingGuestsField = mapFilterElement.querySelector('#housing-guests');
-const mapFeatureFields = mapFilterElement.querySelectorAll('.map__checkbox');
-
 const adFormFields = [typeField, priceField, timeInField, timeOutField, avatarField, titleField, addressField, capacityField, descriptionField, imagesField, roomNumberField, ...featureFields];
-const mapFilterFields = [housingTypeField, housingPriceField, housingRoomsField, housingGuestsField, ...mapFeatureFields];
 
 const typesToPrices = {
   flat: 1000,
@@ -55,12 +47,11 @@ const turnFormOn = (form, fields) => {
 
 const setInactiveState = () => {
   turnFormOff(adFormElement, adFormFields);
-  turnFormOff(mapFilterElement, mapFilterFields);
 };
 
 const setActiveState = () => {
   turnFormOn(adFormElement, adFormFields);
-  turnFormOn(mapFilterElement, mapFilterFields);
+  setAddress(START_COORDINATE);
 };
 
 const setAddress = ({lat, lng}) => {
@@ -174,6 +165,5 @@ const setFormSubmit = (sendData) => {
     sendData(resetForm, new FormData(evt.target));
   });
 };
-
 
 export {setInactiveState, setActiveState, setAddress, setFormSubmit};
