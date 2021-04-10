@@ -41,6 +41,20 @@ const showAlert = (message) => {
   setTimeout(() => {
     alert.remove();
   }, ALERT_SHOW_TIME );
-}
+};
 
-export {getRandomInteger, getRandomFloat, getRandomArrayElement, showAlert, START_COORDINATE};
+const turnFormOff = (form, fields) => {
+  form.classList.add('ad-form--disabled');
+  fields.forEach((field) => {
+    field.disabled = true;
+  });
+};
+
+const turnFormOn = (form, fields) => {
+  form.classList.remove('ad-form--disabled');
+  fields.forEach((field) => {
+    field.disabled = false;
+  });
+};
+
+export {getRandomInteger, getRandomFloat, getRandomArrayElement, showAlert, turnFormOff, turnFormOn, START_COORDINATE};

@@ -1,4 +1,4 @@
-import {START_COORDINATE} from './util.js'
+import {turnFormOff, turnFormOn, START_COORDINATE} from './util.js';
 
 const adFormElement = document.querySelector('.ad-form');
 const resetButton = document.querySelector('.ad-form__reset');
@@ -31,25 +31,11 @@ const roomsToGuests = {
   '100': ['0'],
 };
 
-const turnFormOff = (form, fields) => {
-  form.classList.add('ad-form--disabled');
-  fields.forEach((field) => {
-    field.disabled = true;
-  });
-};
-
-const turnFormOn = (form, fields) => {
-  form.classList.remove('ad-form--disabled');
-  fields.forEach((field) => {
-    field.disabled = false;
-  });
-};
-
-const setInactiveState = () => {
+const turnAdFormOff = () => {
   turnFormOff(adFormElement, adFormFields);
 };
 
-const setActiveState = () => {
+const turnAdFormOn = () => {
   turnFormOn(adFormElement, adFormFields);
   setAddress(START_COORDINATE);
 };
@@ -166,4 +152,4 @@ const setFormSubmit = (sendData) => {
   });
 };
 
-export {setInactiveState, setActiveState, setAddress, setFormSubmit};
+export {turnAdFormOff, turnAdFormOn, setAddress, setFormSubmit};

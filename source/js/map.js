@@ -1,5 +1,5 @@
 /* global L:readonly */
-import {setActiveState, setAddress} from './form.js';
+import {turnAdFormOn, setAddress} from './form.js';
 import createCardElement from './card.js';
 import {START_COORDINATE} from './util.js'
 
@@ -63,7 +63,7 @@ const setAdMarkers = (ads) => {
 };
 
 const onMapLoad = () => {
-  setActiveState();
+  turnAdFormOn();
 };
 
 const onMainPinMove = (evt) => {
