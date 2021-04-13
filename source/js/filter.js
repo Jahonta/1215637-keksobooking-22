@@ -1,4 +1,5 @@
 import {turnFormOff, turnFormOn} from './util.js';
+import debounce from 'lodash/debounce';
 
 const mapFilterElement = document.querySelector('.map__filters');
 const mapFilters = mapFilterElement.querySelectorAll('.map__filter');
@@ -84,7 +85,7 @@ const filterAds = () => {
 };
 
 const setOnFilterChange = (cb) => {
-  onFilterChange = cb;
+  onFilterChange = debounce(cb, 500);
 };
 
 mapFilterFields.forEach((field) => {
