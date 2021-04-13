@@ -26,14 +26,14 @@ const getData = () => {
       if (response.ok) {
         return response.json()
       }
-      onGetDataError('Не удалось загрузить похожие объявления');
+      throw new Error('Не удалось загрузить похожие объявления');
     })
     .then((ads) => {
       const slicedAds = ads.slice(0, ADS_COUNT);
       onGetDataSuccess(slicedAds);
     })
-    .catch(() => {
-      onGetDataError('Не удалось загрузить похожие объявления');
+    .catch((error) => {
+      onGetDataError(error);
     })
 };
 
@@ -52,8 +52,8 @@ const sendData = (body) => {
         onSendDataError();
       }
     })
-    .catch(() => {
-      onSendDataError();
+    .catch((error) => {
+      onSendDataError(error);
     });
 };
 

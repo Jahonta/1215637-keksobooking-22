@@ -3,8 +3,13 @@ import {turnFilterOff, turnFilterOn, setOnFilterChange, resetFilter, getAds} fro
 import {initMap, setOnMapLoad, setOnMainPinMove, renderAdPins, updateAdPins, initMainPin, updateMainPin} from './map.js';
 import {getData, sendData, setOnSendDataSuccess, setOnSendDataError, setOnGetDataSuccess, setOnGetDataError} from './api.js';
 import {showErrorMessage, showSuccessMessage} from './message.js';
-import {showAlert, START_COORDINATE} from './util.js';
+import {showAlert} from './util.js';
 import 'leaflet/dist/leaflet.css';
+
+const START_COORDINATE = {
+  lat: 35.66023,
+  lng: 139.73007,
+};
 
 // Первоначальное состояние
 turnAdFormOff();
