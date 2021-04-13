@@ -34,7 +34,7 @@ const getData = () => {
     })
     .catch((error) => {
       onGetDataError(error);
-    })
+    });
 };
 
 const sendData = (body) => {
@@ -49,7 +49,7 @@ const sendData = (body) => {
       if (response.ok) {
         onSendDataSuccess();
       } else {
-        onSendDataError();
+        throw new Error('Не удалось опубликовать объявление');
       }
     })
     .catch((error) => {
