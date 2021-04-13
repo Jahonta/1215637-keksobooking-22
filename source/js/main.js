@@ -38,11 +38,11 @@ setOnFilterChange(updateAdPins);
 
 // Отправка формы
 setOnSendDataSuccess(() => {
-  showSuccessMessage();
   resetForm();
   updateAddress(START_COORDINATE);
-  resetFilter();
   updateMainPin(START_COORDINATE);
+  resetFilter();
+  showSuccessMessage();
 });
 setOnSendDataError(showErrorMessage);
 setFormSubmit(sendData);

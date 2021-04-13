@@ -110,8 +110,7 @@ const disableCapacity = () => {
   }
 };
 
-const resetForm = (evt) => {
-  evt.preventDefault();
+const resetForm = () => {
   adFormElement.reset();
 };
 

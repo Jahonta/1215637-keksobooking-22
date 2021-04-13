@@ -21,6 +21,7 @@ const turnFilterOn = () => {
 
 const resetFilter = () => {
   mapFilterElement.reset();
+  onFilterChange(ads);
 };
 
 const getAds = (data) => {

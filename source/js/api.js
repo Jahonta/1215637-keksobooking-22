@@ -44,17 +44,15 @@ const sendData = (body) => {
       method: 'POST',
       body,
     },
-  )
-    .then((response) => {
-      if (response.ok) {
-        onSendDataSuccess();
-      } else {
-        throw new Error('Не удалось опубликовать объявление');
-      }
-    })
-    .catch((error) => {
-      onSendDataError(error);
-    });
+  ).then((response) => {
+    if (response.ok) {
+      onSendDataSuccess();
+    } else {
+      throw new Error('Не удалось опубликовать объявление');
+    }
+  }).catch((error) => {
+    onSendDataError(error);
+  });
 };
 
 export {getData, sendData, setOnSendDataSuccess, setOnSendDataError, setOnGetDataSuccess, setOnGetDataError};

@@ -24,18 +24,18 @@ const showSuccessMessage = () => {
   mainElement.append(successMessageElement);
 };
 
-const hideMessage = () => {
-  const messageElement = document.querySelector('.success') || document.querySelector('.error');
-  messageElement.remove();
-  document.removeEventListener('keydown', onMessageEscKeydown);
-  document.removeEventListener('click', hideMessage);
-};
-
 const showErrorMessage = () => {
   const errorMessageElement = errorMessageTemplate.cloneNode(true);
   document.addEventListener('keydown', onMessageEscKeydown);
   document.addEventListener('click', hideMessage);
   mainElement.append(errorMessageElement);
+};
+
+const hideMessage = () => {
+  const messageElement = document.querySelector('.success') || document.querySelector('.error');
+  messageElement.remove();
+  document.removeEventListener('keydown', onMessageEscKeydown);
+  document.removeEventListener('click', hideMessage);
 };
 
 export {showErrorMessage, showSuccessMessage};
