@@ -3,6 +3,7 @@ import createCardElement from './card.js';
 
 let onMapLoad = null;
 let onMainPinMoveCallback = null;
+let adPinMarkers = [];
 
 const map = L.map('map-canvas');
 const mainPinIcon = L.icon({
@@ -25,7 +26,6 @@ const mainPinMarker = L.marker(
     icon: mainPinIcon,
   },
 );
-let adPinMarkers = [];
 
 const initMap = (coordinate) => {
   map.on('load', onMapLoad).setView(coordinate, 10);
@@ -52,7 +52,7 @@ const createAdPinMarkers = (ads) => {
         lng: ad.location.lng,
       },
       {
-        adPinIcon,
+        icon: adPinIcon,
       },
     );
     marker.bindPopup(createCardElement(ad),
