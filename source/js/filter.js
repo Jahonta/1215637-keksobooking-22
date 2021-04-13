@@ -28,14 +28,58 @@ const getAds = (data) => {
 }
 
 const filterByType = (ad, type) => {
-  return
+  return type === 'any' || ad.offer.type === type;
+};
+
+const filterByPrice = (ad, price) => {
+  switch (price) {
+    case 'any':
+      return true;
+    case 'middle':
+      return ad.offer.price < 50000 && ad.offer.price >= 10000;
+    case 'low':
+      return ad.offer.price < 10000;
+    case 'high':
+      return ad.offer.price >= 50000;
+  }
+};
+
+const filterByRooms = (ad, rooms) => {
+  return rooms === 'any' || ad.offer.rooms === +rooms;
+};
+
+const filterByGuests = (ad, guests) => {
+  return guests === 'any' || ad.offer.guests === +guests;
+};
+
+const filterByFeatures = (ad, features) => {
+  if (features.length === 0) {
+    return true;
+  }
+  return features.every((feature) => ad.offer.features.includes(feature));
 };
 
 const filterAds = () => {
-  const filteredAds = [];
-  ads.forEach((ad) => {
-    filterByType();
+  const selectedType = housingTypeField.value;
+  const selectedTPrice = housingPriceField.value;
+  const selectedTRooms = housingRoomsField.value;
+  const selectedTGuests = housingGuestsField.value;
+  const selectedFeatures = [];
+  [...mapCheckboxes].forEach((checkbox) => {
+    if (checkbox.checked) {
+      selectedFeatures.push(checkbox.value);
+    }
   });
+
+  const filteredAds = ads.filter((ad) => (
+    filterByType(ad, selectedType) &&
+    filterByPrice(ad, selectedTPrice) &&
+    filterByRooms(ad, selectedTRooms) &&
+    filterByGuests(ad, selectedTGuests) &&
+    filterByFeatures(ad, selectedFeatures)
+  ));
+
+  return filteredAds;
 };
 
 const setOnFilterChange = (cb) => {
@@ -43,7 +87,10 @@ const setOnFilterChange = (cb) => {
 };
 
 mapFilterFields.forEach((field) => {
-  field.addEventListener('change', onFilterChange)
+  field.addEventListener('change', () => {
+    const filteredAds = filterAds();
+    onFilterChange(filteredAds);
+  })
 });
 
 export {turnFilterOff, turnFilterOn, resetFilter, setOnFilterChange, getAds};

@@ -27,7 +27,7 @@
     "lodash": "4.17.21"
   },
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack",
     "start": "browser-sync start --server \"build/\" --no-ui --files \"source/**/*.js\"",
     "test": "eslint js/"
   },
