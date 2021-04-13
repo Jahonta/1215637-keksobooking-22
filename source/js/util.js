@@ -53,4 +53,4 @@ const turnFormOn = (form, fields) => {
   });
 };
 
-export {getRandomInteger, getRandomFloat, getRandomArrayElement, showAlert, turnFormOff, turnFormOn, START_COORDINATE};
+export {getRandomInteger, getRandomFloat, getRandomArrayElement, showAlert, turnFormOff, turnFormOn};
