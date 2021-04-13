@@ -7,16 +7,19 @@ const priceField = adFormElement.querySelector('#price');
 const timeInField = adFormElement.querySelector('#timein');
 const timeOutField = adFormElement.querySelector('#timeout');
 const avatarField = adFormElement.querySelector('#avatar');
+const avatarPreview = adFormElement.querySelector('.ad-form-header__preview img');
 const titleField = adFormElement.querySelector('#title');
 const addressField = adFormElement.querySelector('#address');
 const capacityField = adFormElement.querySelector('#capacity');
 const descriptionField = adFormElement.querySelector('#description');
 const imagesField = adFormElement.querySelector('#images');
+const imagesPreviewBox = adFormElement.querySelector('.ad-form__photo');
 const roomNumberField = adFormElement.querySelector('#room_number');
 const featureFields = adFormElement.querySelectorAll('.feature__checkbox');
 
 const adFormFields = [typeField, priceField, timeInField, timeOutField, avatarField, titleField, addressField, capacityField, descriptionField, imagesField, roomNumberField, ...featureFields];
 
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const typesToPrices = {
   flat: 1000,
   bungalow: 0,
@@ -112,6 +115,7 @@ const disableCapacity = () => {
 
 const resetForm = () => {
   adFormElement.reset();
+  imagesPreviewBox.innerHTML = '';
 };
 
 typeField.addEventListener('change', () => {
@@ -134,6 +138,48 @@ roomNumberField.addEventListener('change', () => {
 
 addressField.addEventListener('focus', () => {
   addressField.blur();
+});
+
+avatarField.addEventListener('change', () => {
+  const file = avatarField.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => {
+    return fileName.endsWith(it);
+  });
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      avatarPreview.src = reader.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
+});
+
+imagesField.addEventListener('change', () => {
+  const file = imagesField.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => {
+    return fileName.endsWith(it);
+  });
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      const image = document.createElement('img');
+      image.src = reader.result;
+      image.style.maxWidth = '100%';
+      image.style.height = 'auto';
+      imagesPreviewBox.append(image);
+    });
+
+    reader.readAsDataURL(file);
+  }
 });
 
 resetButton.addEventListener('click', resetForm);
