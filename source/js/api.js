@@ -1,25 +1,43 @@
-import {showErrorMessage, showSuccessMessage} from './message.js';
-
 const ADS_COUNT = 10;
+let onSendDataSuccess = null;
+let onSendDataError = null;
+let onGetDataSuccess = null;
+let onGetDataError = null;
 
-const getData = (onSuccess, onError) => {
+const setOnSendDataSuccess = (cb) => {
+  onSendDataSuccess = cb;
+};
+
+const setOnSendDataError = (cb) => {
+  onSendDataError = cb;
+};
+
+const setOnGetDataSuccess = (cb) => {
+  onGetDataSuccess = cb;
+};
+
+const setOnGetDataError = (cb) => {
+  onGetDataError = cb;
+};
+
+const getData = () => {
   fetch('https://22.javascript.pages.academy/keksobooking/data')
     .then((response) => {
       if (response.ok) {
         return response.json()
       }
-      onError('Не удалось загрузить похожие объявления');
+      onGetDataError('Не удалось загрузить похожие объявления');
     })
     .then((ads) => {
       const slicedAds = ads.slice(0, ADS_COUNT);
-      onSuccess(slicedAds);
+      onGetDataSuccess(slicedAds);
     })
     .catch(() => {
-      onError('Не удалось загрузить похожие объявления');
+      onGetDataError('Не удалось загрузить похожие объявления');
     })
 };
 
-const sendData = (onSuccess, body) => {
+const sendData = (body) => {
   fetch(
     'https://22.javascript.pages.academy/keksobooking',
     {
@@ -29,15 +47,14 @@ const sendData = (onSuccess, body) => {
   )
     .then((response) => {
       if (response.ok) {
-        onSuccess();
-        showSuccessMessage();
+        onSendDataSuccess();
       } else {
-        showErrorMessage();
+        onSendDataError();
       }
     })
     .catch(() => {
-      showErrorMessage();
+      onSendDataError();
     });
 };
 
-export {getData, sendData};
+export {getData, sendData, setOnSendDataSuccess, setOnSendDataError, setOnGetDataSuccess, setOnGetDataError};

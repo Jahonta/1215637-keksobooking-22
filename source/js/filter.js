@@ -8,6 +8,8 @@ const housingTypeField = mapFilterElement.querySelector('#housing-type');
 const housingPriceField = mapFilterElement.querySelector('#housing-price');
 const housingRoomsField = mapFilterElement.querySelector('#housing-rooms');
 const housingGuestsField = mapFilterElement.querySelector('#housing-guests');
+let onFilterChange = null;
+let ads = [];
 
 const turnFilterOff = () => {
   turnFormOff(mapFilterElement, mapFilterFields);
@@ -17,8 +19,31 @@ const turnFilterOn = () => {
   turnFormOn(mapFilterElement, mapFilterFields);
 };
 
+const resetFilter = () => {
+  mapFilterElement.reset();
+};
+
+const getAds = (data) => {
+  ads = data;
+}
+
 const filterByType = (ad, type) => {
   return
 };
 
-export {turnFilterOff, turnFilterOn};
+const filterAds = () => {
+  const filteredAds = [];
+  ads.forEach((ad) => {
+    filterByType();
+  });
+};
+
+const setOnFilterChange = (cb) => {
+  onFilterChange = cb;
+};
+
+mapFilterFields.forEach((field) => {
+  field.addEventListener('change', onFilterChange)
+});
+
+export {turnFilterOff, turnFilterOn, resetFilter, setOnFilterChange, getAds};

@@ -1,4 +1,4 @@
-import {turnFormOff, turnFormOn, START_COORDINATE} from './util.js';
+import {turnFormOff, turnFormOn} from './util.js';
 
 const adFormElement = document.querySelector('.ad-form');
 const resetButton = document.querySelector('.ad-form__reset');
@@ -37,10 +37,9 @@ const turnAdFormOff = () => {
 
 const turnAdFormOn = () => {
   turnFormOn(adFormElement, adFormFields);
-  setAddress(START_COORDINATE);
 };
 
-const setAddress = ({lat, lng}) => {
+const updateAddress = ({lat, lng}) => {
   addressField.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
 };
 
@@ -114,7 +113,6 @@ const disableCapacity = () => {
 const resetForm = (evt) => {
   evt.preventDefault();
   adFormElement.reset();
-  setAddress(START_COORDINATE);
 };
 
 typeField.addEventListener('change', () => {
@@ -148,8 +146,8 @@ addressField.addEventListener('invalid', validateAddress);
 const setFormSubmit = (sendData) => {
   adFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    sendData(resetForm, new FormData(evt.target));
+    sendData(new FormData(evt.target));
   });
 };
 
-export {turnAdFormOff, turnAdFormOn, setAddress, setFormSubmit};
+export {turnAdFormOff, turnAdFormOn, updateAddress, setFormSubmit, resetForm};
